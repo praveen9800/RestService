@@ -1,0 +1,120 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: Banks
+  license:
+    name: MIT
+    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
+host: localhost:8080
+basePath: /
+securityDefinitions:
+  auth:
+    type: basic
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /RestService/webapi/accounts:
+    get:
+      description: Get all Accounts
+      tags:
+      - Accounts
+      operationId: get all Accounts_
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: Users response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Account'
+        401:
+          description: Unauthenticated
+      security:
+      - auth: []
+       
+    post:
+      description: Create a Account
+      tags:
+      - CreateAccount
+      operationId: create new Account
+      produces:
+      - application/json
+      parameters:
+      - name: track
+        in: body
+        required: true
+        x-is-map: false
+        description: The new user details to create
+        schema:
+          $ref: '#/definitions/Account'
+      responses:
+        200:
+          description: User response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+      - auth: []
+  /RestService/webapi/accounts/{accNo}:
+    get:
+      description: Get a single user
+      tags:
+      - user
+      operationId: get user by Account No
+      produces:
+      - application/json
+      parameters:
+      - name: accNo
+        in: path
+        required: true
+        x-is-map: false
+        type: number
+        description: The Account No of the user to get
+      responses:
+        200:
+          description: User response
+          schema:
+            $ref: '#/definitions/Account'
+        400:
+          description: Invalid Account No format
+        401:
+          description: Unauthenticated access
+        404:
+          description: No user with the given Account No
+      security:
+      - auth: []
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false    
+definitions:
+  Account:
+    title: Account
+    type: object
+    properties:
+      accName:
+        type: string
+      accNo:
+        type: number
+      accType:
+        type: string
+      amount:
+        type: number
+      balType:
+        type: string
+      currency:
+        type: string
+    required:
+    - accName
+    - accNo
+    - accType
+    - amount
+    - balType
+    - currency
