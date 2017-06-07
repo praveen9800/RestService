@@ -5,7 +5,7 @@
 
     <groupId>com.restapi</groupId>
     <artifactId>RestService</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>RestService</name>
 
@@ -68,7 +68,6 @@
                         <version>2.6</version>
                         <configuration>
                             <outputDirectory>target</outputDirectory>
-                            <packaging>war</packaging>
                             <warName>ROOT</warName>
                         </configuration>
                     </plugin>
